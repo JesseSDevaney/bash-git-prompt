@@ -595,7 +595,7 @@ function updatePrompt() {
     __add_status        "${ResetColor}${GIT_PROMPT_SUFFIX}"
 
     if [[ "${GIT_PROMPT_VIRTUAL_ENV_AFTER_PROMPT:-0}" == "0" ]]; then
-      NEW_PROMPT="$(gp_add_virtualenv_to_prompt)${PROMPT_START}$(${prompt_callback})${STATUS_PREFIX}${STATUS}${PROMPT_END}"
+      NEW_PROMPT="$(gp_add_virtualenv_to_prompt)${PROMPT_START}$(${prompt_callback})${STATUS_PREFIX}${STATUS}"
     else
       NEW_PROMPT="${PROMPT_START}$(${prompt_callback})$(gp_add_virtualenv_to_prompt)${STATUS_PREFIX}${STATUS}${PROMPT_END}"
     fi
@@ -603,7 +603,7 @@ function updatePrompt() {
     NEW_PROMPT="${EMPTY_PROMPT}"
   fi
 
-  PS1="${NEW_PROMPT//_LAST_COMMAND_INDICATOR_/${LAST_COMMAND_INDICATOR}${ResetColor}}"
+  PS1="${NEW_PROMPT//_LAST_COMMAND_INDICATOR_/${LAST_COMMAND_INDICATOR}${ResetColor}}\$ "
   command rm "${GIT_INDEX_PRIVATE}" 2>/dev/null
 }
 

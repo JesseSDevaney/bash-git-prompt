@@ -55,29 +55,12 @@ The symbols are as follows:
 
 ## Installation
 
-### via [Homebrew][homebrew] on Mac OS X
-
-- Run `brew update`
-
-- Run `brew install bash-git-prompt` for the last stable release or `brew install --HEAD bash-git-prompt` for the
-   latest version directly from the repository
-
-- Now you can source the file in your `~/.bash_profile` as follows:
-
-```sh
-if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  GIT_PROMPT_ONLY_IN_REPO=1
-  source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
-fi
-```
-
 ### via Git clone
 
 - Clone this repository to your home directory.
 
 ```sh
-git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+git clone https://github.com/jessesdevaney/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 ```
 
 Add to the `~/.bashrc`:
@@ -87,29 +70,6 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 ```
-
-### install for the fish shell
-
-- If you cloned the repo to a directory other then `~/.bash-git-prompt` , set `__GIT_PROMPT_DIR` in `~/.config/fish/config.fish`
-   to that path
-
-- To install as an option in the fish_config GUI
-
-```sh
-sudo install -m 666 gitprompt.fish /usr/share/fish/tools/web_config/sample_prompts/
-fish_config
-```
-   to install the bash-git-prompt as a choice under the prompt tab of the web config. Selecting this will copy it to
-   ~/.config/fish/functions/fish_prompt.fish
-
-- You can also do
-
-```sh
-mkdir -p ~/.config/fish/functions/
-cp gitprompt.fish ~/.config/fish/functions/fish_prompt.fish
-```
-   to overwrite the current prompt with the bash-git-prompt directly
-
 
 ### All configs for .bashrc
 
@@ -293,77 +253,5 @@ git_prompt_toggle
 
 **Enjoy!**
 
-## Alternative RPM Install
-
-This project ships an RPM spec to simplify installation on RHEL and
-clones. If you wish to install from RPM, you may first build the RPM
-from scratch by following this procedure:
-* Clone this repository and tag the release with a version number
-
-````sh
-    git tag -a -m "Tag release 1.1" 1.1
-````
-
-* Run the following command to create a tarball:
-
-````sh
-    VER=$(git describe)
-    # replace dash with underscore to work around
-    # rpmbuild does not allow dash in version string
-    VER=${VER//\-/_}
-    git archive                                \
-        --format tar                           \
-        --prefix=bash-git-prompt-${VER}/       \
-        HEAD                                   \
-        --  *.sh                               \
-            *.fish                             \
-            README.md                          \
-            themes                             \
-      > bash-git-prompt-${VER}.tar
-    mkdir -p /tmp/bash-git-prompt-${VER}
-    sed "s/Version:.*/Version:        ${VER}/"          \
-        bash-git-prompt.spec                            \
-      > /tmp/bash-git-prompt-${VER}/bash-git-prompt.spec
-    OLDDIR=$(pwd)
-    cd /tmp
-    tar -uf ${OLDDIR}/bash-git-prompt-${VER}.tar      \
-            bash-git-prompt-${VER}/bash-git-prompt.spec
-    cd ${OLDDIR}
-    gzip bash-git-prompt-${VER}.tar
-    mv bash-git-prompt-${VER}.tar.gz bash-git-prompt-${VER}.tgz
-````
-
-* Log into an RHEL or clones host and run:
-
-````sh
-rpmbuild -ta bash-git-prompt-xxx.tar.gz
-````
-Then you may publish or install the rpm from "~/rpmbuild/RPMS/noarch".
-
 ## License
 This code is under the [BSD 2 Clause (NetBSD) license][license].
-
-## Who Are You?
-The current maintainer of the original bash-git-prompt is [Martin Gondermann][magicmonty].
-
-## Contributing
-If you want to contribute you can look for issues with the label [up-for-grabs][upforgrabs].
-Please leave a comment on the issue, that you want to fix it, so others know, the labels are "taken".
-
-Pull requests are welcome. I will check them and merge them, if I think they help the project.
-
-## Similar projects
-https://github.com/ohmybash/oh-my-bash
-
-## Donations
-I accept tips through [Flattr][flattr].
-
-[![Flattr](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=magicmonty&url=https%3A%2F%2Fgithub.com%2Fmagicmonty%2Fbash-git-prompt)
-
-[blog post]: http://sebastiancelis.com/2009/nov/16/zsh-prompt-git-users/
-[tip]:https://www.gittip.com/magicmonty/
-[magicmonty]: http://blog.pagansoft.de/pages/about.html
-[license]:https://github.com/magicmonty/bash-git-prompt/tree/master/LICENSE.txt
-[flattr]: https://flattr.com/submit/auto?user_id=magicmonty&url=https%3A%2F%2Fgithub.com%2Fmagicmonty%2Fbash-git-prompt
-[homebrew]: http://brew.sh/
-[upforgrabs]: https://github.com/magicmonty/bash-git-prompt/labels/up-for-grabs
