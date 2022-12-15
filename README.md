@@ -59,9 +59,16 @@ The symbols are as follows:
 
 - Clone this repository to your home directory.
 
+**HTTPS:**
 ```sh
 git clone https://github.com/jessesdevaney/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 ```
+
+**SSH:**
+```sh
+git clone git@github.com:JesseSDevaney/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+```
+
 
 Add to the `~/.bashrc`:
 ```
